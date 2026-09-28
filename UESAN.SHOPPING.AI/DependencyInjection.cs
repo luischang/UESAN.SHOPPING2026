@@ -12,6 +12,7 @@ using UESAN.SHOPPING.AI.H5_Herramientas;
 using UESAN.SHOPPING.AI.H6_Workflow;
 using UESAN.SHOPPING.AI.H7_Agente;
 using UESAN.SHOPPING.AI.H8_Activacion;
+using UESAN.SHOPPING.AI.H10_Multiagente;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -63,6 +64,9 @@ public static class DependencyInjection
         // H8 · cola de eventos + worker en segundo plano (activación sin intervención humana)
         services.AddScoped<RepositorioEventos>();
         services.AddHostedService<AgenteWorker>();
+
+        // H10 · multiagente (orquestador-trabajadores)
+        services.AddScoped<OrquestadorPostventaService>();
 
         return services;
     }

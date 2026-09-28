@@ -193,3 +193,17 @@ POST {{api}}/api/ia/h9/guardia
 Content-Type: application/json
 
 { "texto": "Quiero devolver el mouse porque llegó incómodo" }
+
+### H10 · Multiagente: pregunta que activa 3 trabajadores a la vez (mira "trabajadores")
+POST {{api}}/api/ia/h10/orquestar
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pregunta": "¿Tienen teclados mecánicos en stock, cuál es la política de devolución y en qué estado está mi pedido 1002?" }
+
+### H10 · Pregunta simple: debería activar solo un trabajador (POLITICAS)
+POST {{api}}/api/ia/h10/orquestar
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pregunta": "¿Cuántos días tengo para devolver un producto?" }

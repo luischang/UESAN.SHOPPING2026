@@ -62,5 +62,6 @@ ia.MapH6Endpoints();   // H6 · workflow con IA
 ia.MapH7Endpoints();   // H7 · agente
 ia.MapH8Endpoints();   // H8 · activación (cola + worker)
 ia.MapH9Endpoints();   // H9 · verificación de la guardia de contenido
+ia.MapH10Endpoints();  // H10 · multiagente (orquestador-trabajadores)
 
 app.Run();
