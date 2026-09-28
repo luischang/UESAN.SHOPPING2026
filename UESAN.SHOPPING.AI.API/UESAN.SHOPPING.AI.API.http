@@ -39,3 +39,21 @@ POST {{api}}/api/ia/h2/mis-pedidos
 Content-Type: application/json
 
 { "clienteId": 1, "pregunta": "¿Todavía puedo devolver los audífonos?" }
+
+### H3 · ¿Cómo se ve un embedding?
+GET {{api}}/api/ia/h3/embedding?texto=devolver un producto
+
+### H3 · Similitud: sinónimos (alta) vs. temas distintos (baja)
+GET {{api}}/api/ia/h3/similitud?a=devolver un producto&b=reembolso de una compra
+
+###
+GET {{api}}/api/ia/h3/similitud?a=devolver un producto&b=balón de fútbol
+
+### H3 · Indexar las políticas (ejecutar una vez, o cada vez que cambien)
+POST {{api}}/api/ia/h3/ingesta
+
+### H3 · Ver el índice
+GET {{api}}/api/ia/h3/indice
+
+### H3 · Búsqueda semántica (no comparte palabras exactas con el documento)
+GET {{api}}/api/ia/h3/buscar?q=me llegó roto el producto, qué hago&top=3

@@ -24,5 +24,6 @@ app.MapTiendaEndpoints();
 var ia = app.MapGroup("/api/ia");
 ia.MapH1Endpoints();   // H1 · pregunta y respuesta
 ia.MapH2Endpoints();   // H2 · datos transaccionales como contexto
+ia.MapH3Endpoints();   // H3 · embeddings y búsqueda vectorial
 
 app.Run();

@@ -15,6 +15,17 @@ public sealed class AiOptions
 
     public OllamaOptions Ollama { get; set; } = new();
     public OpenAIOptions OpenAI { get; set; } = new();
+
+    public ConocimientoOptions Conocimiento { get; set; } = new();
+}
+
+public sealed class ConocimientoOptions
+{
+    /// <summary>Carpeta con los documentos .md (relativa a la carpeta de la aplicación).</summary>
+    public string Carpeta { get; set; } = "conocimiento";
+
+    /// <summary>Tamaño máximo aproximado de cada fragmento (en caracteres).</summary>
+    public int TamanoMaximoFragmento { get; set; } = 1200;
 }
 
 public sealed class OllamaOptions

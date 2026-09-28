@@ -6,6 +6,7 @@ using UESAN.SHOPPING.AI.Configuracion;
 using UESAN.SHOPPING.AI.Datos;
 using UESAN.SHOPPING.AI.H1_Chat;
 using UESAN.SHOPPING.AI.H2_DatosTransaccionales;
+using UESAN.SHOPPING.AI.H3_Embeddings;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -29,6 +30,13 @@ public static class DependencyInjection
 
         // H2 · datos transaccionales como contexto
         services.AddScoped<AsistentePedidosService>();
+
+        // H3 · embeddings y búsqueda vectorial
+        services.AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp =>
+            ProveedoresIa.CrearEmbeddings(sp.GetRequiredService<IOptions<AiOptions>>().Value));
+        services.AddScoped<RepositorioConocimiento>();
+        services.AddScoped<IngestaService>();
+        services.AddScoped<BuscadorSemantico>();
 
         return services;
     }

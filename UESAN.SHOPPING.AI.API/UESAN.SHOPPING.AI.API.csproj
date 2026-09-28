@@ -20,6 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- H3: documentos de conocimiento (políticas de la tienda) que se indexan -->
+    <None Include="conocimiento\**\*.md" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UESAN.SHOPPING.AI\UESAN.SHOPPING.AI.csproj" />
   </ItemGroup>
 
