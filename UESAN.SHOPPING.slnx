@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="UESAN.SHOPPING.AI.API/UESAN.SHOPPING.AI.API.csproj" />
+  <Project Path="UESAN.SHOPPING.AI/UESAN.SHOPPING.AI.csproj" />
   <Project Path="UESAN.SHOPPING.API/UESAN.SHOPPING.API.csproj" />
   <Project Path="UESAN.SHOPPING.CORE/UESAN.SHOPPING.CORE.csproj" />
 </Solution>

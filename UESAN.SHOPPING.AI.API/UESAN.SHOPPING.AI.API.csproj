@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    UESAN.SHOPPING.AI.API
+    Servicio web (Minimal API) que expone las capacidades de IA.
+    Es un proyecto aparte para no tocar la API principal del curso:
+    así cada hito se puede revisar sin romper lo construido en semanas anteriores.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>UESAN.SHOPPING.AI.API</RootNamespace>
+    <UserSecretsId>uesan-shopping-ai-2026</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UESAN.SHOPPING.AI\UESAN.SHOPPING.AI.csproj" />
+  </ItemGroup>
+
+</Project>

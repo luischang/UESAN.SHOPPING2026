@@ -1,0 +1,14 @@
+# Pruebas del servicio de IA (Visual Studio / VS Code REST Client)
+@api = http://localhost:5080
+
+### H0 · Productos (datos transaccionales, sin IA)
+GET {{api}}/api/tienda/productos
+
+### H0 · Buscar productos
+GET {{api}}/api/tienda/productos?q=audífonos
+
+### H0 · Pedido con detalle
+GET {{api}}/api/tienda/pedidos/1001
+
+### H0 · Pedidos de un cliente
+GET {{api}}/api/tienda/clientes/1/pedidos

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    UESAN.SHOPPING.AI
+    Biblioteca con toda la lógica de IA del curso (semanas 7 y 8).
+    Cada carpeta Hx_* corresponde a un hito (commit) de la rama de IA.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>UESAN.SHOPPING.AI</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Da acceso a Hosting, Options, Logging y BackgroundService sin paquetes extra -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- H0: acceso a datos transaccionales con Dapper (visto en la semana 6) -->
+    <PackageReference Include="Dapper" Version="2.*" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.*" />
+  </ItemGroup>
+
+</Project>
