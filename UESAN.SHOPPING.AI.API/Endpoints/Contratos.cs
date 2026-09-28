@@ -4,3 +4,4 @@ namespace UESAN.SHOPPING.AI.API.Endpoints;
 public sealed record PreguntaRequest(string Pregunta);
 public sealed record PreguntaClienteRequest(int ClienteId, string Pregunta);
 public sealed record PreguntaRagRequest(string Pregunta, int? ClienteId);
+public sealed record SolicitudDevolucionRequest(int PedidoId, string Mensaje);

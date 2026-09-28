@@ -112,3 +112,24 @@ X-Cliente-Id: 2
 
 ### H5 · Auditoría
 GET {{api}}/api/ia/h5/auditoria
+
+### H6 · Workflow: devolución válida (mira "pasos": quién hizo cada paso, LLM o Código)
+POST {{api}}/api/ia/h6/devoluciones
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pedidoId": 1001, "mensaje": "El mouse me resultó incómodo, quiero devolverlo" }
+
+### H6 · Workflow: producto no retornable (Carla, cepillo eléctrico)
+POST {{api}}/api/ia/h6/devoluciones
+Content-Type: application/json
+X-Cliente-Id: 3
+
+{ "pedidoId": 1005, "mensaje": "Quiero devolver el cepillo, no lo usé" }
+
+### H6 · Workflow: no es una devolución (se deriva)
+POST {{api}}/api/ia/h6/devoluciones
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pedidoId": 1002, "mensaje": "Mi pedido no llega, ¿dónde está?" }

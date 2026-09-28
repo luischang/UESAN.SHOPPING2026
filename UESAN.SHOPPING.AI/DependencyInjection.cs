@@ -9,6 +9,7 @@ using UESAN.SHOPPING.AI.H2_DatosTransaccionales;
 using UESAN.SHOPPING.AI.H3_Embeddings;
 using UESAN.SHOPPING.AI.H4_Rag;
 using UESAN.SHOPPING.AI.H5_Herramientas;
+using UESAN.SHOPPING.AI.H6_Workflow;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -49,6 +50,9 @@ public static class DependencyInjection
         services.AddScoped<PuertaHerramientas>();
         services.AddScoped<HerramientasFactory>();
         services.AddScoped<AsistenteHerramientasService>();
+
+        // H6 · workflow con IA (camino fijo en código)
+        services.AddScoped<DevolucionWorkflow>();
 
         return services;
     }
