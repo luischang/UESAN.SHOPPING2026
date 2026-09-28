@@ -28,13 +28,16 @@ public static class H7AgenteEndpoints
         g.MapPost("/agente/{id:guid}/evidencia", async (Guid id, EvidenciaRequest req, AgenteDevoluciones agente, CancellationToken ct) =>
             Results.Ok(await agente.ReanudarConEvidenciaAsync(id, req.Descripcion, ct)));
 
-        // Bandeja de supervisor: ejecuciones esperando aprobación (reembolso > umbral)
+        // Bandeja de supervisor: ejecuciones esperando aprobación (reembolso > umbral).
+        // H9: solo un usuario con el claim role=Supervisor (ver /dev/token) puede verla y usarla.
         g.MapGet("/aprobaciones", async (RepositorioEjecuciones repo) =>
             (await repo.PendientesDeAprobacionAsync())
-                .Select(e => new { e.Id, e.ClienteId, e.MensajeInicial, e.PendienteJson, e.FechaInicio }));
+                .Select(e => new { e.Id, e.ClienteId, e.MensajeInicial, e.PendienteJson, e.FechaInicio }))
+            .RequireAuthorization("Supervisor");
 
         g.MapPost("/aprobaciones/{id:guid}", async (Guid id, AprobacionRequest req, AgenteDevoluciones agente, CancellationToken ct) =>
-            Results.Ok(await agente.AprobarAsync(id, req.Aprobador, ct)));
+            Results.Ok(await agente.AprobarAsync(id, req.Aprobador, ct)))
+            .RequireAuthorization("Supervisor");
 
         return ia;
     }
