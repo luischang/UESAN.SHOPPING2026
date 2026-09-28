@@ -9,6 +9,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddProblemDetails();
 builder.Services.AddShoppingAi(builder.Configuration);
 
+// H11 · servidor MCP: expone la tienda (solo lectura) a cualquier cliente MCP
+builder.Services.AddMcpServer()
+    .WithHttpTransport()
+    .WithToolsFromAssembly();
+
 // H9 · seguridad y gobierno ----------------------------------------------------------
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.Seccion));
@@ -63,5 +68,7 @@ ia.MapH7Endpoints();   // H7 · agente
 ia.MapH8Endpoints();   // H8 · activación (cola + worker)
 ia.MapH9Endpoints();   // H9 · verificación de la guardia de contenido
 ia.MapH10Endpoints();  // H10 · multiagente (orquestador-trabajadores)
+
+app.MapMcp("/mcp");    // H11 · servidor MCP (solo lectura: ConsultarProducto, BuscarPolitica)
 
 app.Run();

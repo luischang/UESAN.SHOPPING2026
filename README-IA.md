@@ -23,7 +23,7 @@ para poder volver a él con `git checkout ia-hN`.
 | H8 | 8 | Activación | Cola de eventos + `BackgroundService` y revisión programada |
 | H9 | 8 | Seguridad y gobierno | JWT, CORS, rate limiting, prompt injection, presupuesto |
 | H10 | 8 | Multiagente | Orquestador-trabajadores (patrón descrito por Anthropic) |
-| H11 | 8 | MCP | Servidor MCP con herramientas de solo lectura |
+| H11 | 8 | MCP | Servidor MCP con herramientas de solo lectura (`ConsultarProducto`, `BuscarPolitica`) |
 
 Cada hito tiene su guía en `docs/ia/`.
 
