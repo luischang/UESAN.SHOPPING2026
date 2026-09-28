@@ -57,3 +57,27 @@ GET {{api}}/api/ia/h3/indice
 
 ### H3 · Búsqueda semántica (no comparte palabras exactas con el documento)
 GET {{api}}/api/ia/h3/buscar?q=me llegó roto el producto, qué hago&top=3
+
+### H4 · RAG solo con documentos (compárala con la misma pregunta en H1)
+POST {{api}}/api/ia/h4/rag
+Content-Type: application/json
+
+{ "pregunta": "¿Cuántos días tengo para devolver un producto?" }
+
+### H4 · RAG + datos transaccionales (Ana, pedido 1001 entregado hace 10 días)
+POST {{api}}/api/ia/h4/rag
+Content-Type: application/json
+
+{ "pregunta": "¿Todavía puedo devolver mis audífonos?", "clienteId": 1 }
+
+### H4 · RAG + datos (Carla: cepillo eléctrico, producto de higiene)
+POST {{api}}/api/ia/h4/rag
+Content-Type: application/json
+
+{ "pregunta": "Quiero devolver el cepillo eléctrico, ¿se puede?", "clienteId": 3 }
+
+### H4 · Pregunta fuera de las políticas (debe decir que no tiene la información)
+POST {{api}}/api/ia/h4/rag
+Content-Type: application/json
+
+{ "pregunta": "¿Venden autos eléctricos?" }
