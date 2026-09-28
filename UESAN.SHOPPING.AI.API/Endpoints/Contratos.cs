@@ -8,3 +8,4 @@ public sealed record SolicitudDevolucionRequest(int PedidoId, string Mensaje);
 public sealed record IniciarAgenteRequest(string Mensaje);
 public sealed record EvidenciaRequest(string Descripcion);
 public sealed record AprobacionRequest(string Aprobador);
+public sealed record EncolarEventoRequest(int ClienteId, string Mensaje);

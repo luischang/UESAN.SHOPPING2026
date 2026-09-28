@@ -11,6 +11,7 @@ using UESAN.SHOPPING.AI.H4_Rag;
 using UESAN.SHOPPING.AI.H5_Herramientas;
 using UESAN.SHOPPING.AI.H6_Workflow;
 using UESAN.SHOPPING.AI.H7_Agente;
+using UESAN.SHOPPING.AI.H8_Activacion;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -58,6 +59,10 @@ public static class DependencyInjection
         // H7 · agente (ciclo observar-decidir-actuar-evaluar)
         services.AddScoped<RepositorioEjecuciones>();
         services.AddScoped<AgenteDevoluciones>();
+
+        // H8 · cola de eventos + worker en segundo plano (activación sin intervención humana)
+        services.AddScoped<RepositorioEventos>();
+        services.AddHostedService<AgenteWorker>();
 
         return services;
     }

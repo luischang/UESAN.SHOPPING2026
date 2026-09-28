@@ -29,5 +29,6 @@ ia.MapH4Endpoints();   // H4 · RAG
 ia.MapH5Endpoints();   // H5 · herramientas (tool calling)
 ia.MapH6Endpoints();   // H6 · workflow con IA
 ia.MapH7Endpoints();   // H7 · agente
+ia.MapH8Endpoints();   // H8 · activación (cola + worker)
 
 app.Run();
