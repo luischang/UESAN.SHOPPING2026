@@ -12,3 +12,18 @@ GET {{api}}/api/tienda/pedidos/1001
 
 ### H0 · Pedidos de un cliente
 GET {{api}}/api/tienda/clientes/1/pedidos
+
+### H1 · ¿Qué modelo está activo?
+GET {{api}}/api/ia/h1/proveedor
+
+### H1 · Pregunta y respuesta (respuesta genérica: no conoce nuestras políticas)
+POST {{api}}/api/ia/h1/chat
+Content-Type: application/json
+
+{ "pregunta": "¿Cuántos días tengo para devolver un producto?" }
+
+### H1 · Streaming
+POST {{api}}/api/ia/h1/chat/stream
+Content-Type: application/json
+
+{ "pregunta": "Explica en 3 líneas qué es una tienda en línea" }

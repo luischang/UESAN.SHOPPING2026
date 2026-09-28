@@ -23,4 +23,11 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- H1: abstracciones comunes de IA para .NET + proveedores -->
+    <PackageReference Include="Microsoft.Extensions.AI" Version="10.*" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.*-*" />
+    <PackageReference Include="OllamaSharp" Version="5.*" />
+  </ItemGroup>
+
 </Project>

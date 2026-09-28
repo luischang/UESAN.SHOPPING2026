@@ -20,4 +20,8 @@ app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 // H0 · datos transaccionales de la tienda (sin IA)
 app.MapTiendaEndpoints();
 
+// Endpoints de IA: todos cuelgan de /api/ia
+var ia = app.MapGroup("/api/ia");
+ia.MapH1Endpoints();   // H1 · pregunta y respuesta
+
 app.Run();
