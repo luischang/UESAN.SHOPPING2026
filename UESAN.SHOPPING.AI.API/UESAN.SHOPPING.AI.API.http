@@ -81,3 +81,34 @@ POST {{api}}/api/ia/h4/rag
 Content-Type: application/json
 
 { "pregunta": "¿Venden autos eléctricos?" }
+
+### H5 · Informar: el modelo decide consultar el pedido (mira "herramientas" en la respuesta)
+POST {{api}}/api/ia/h5/asistente
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pregunta": "¿En qué estado está mi pedido 1002?" }
+
+### H5 · Actuar: registrar devolución (Ana, pedido 1001, audífonos = producto 1)
+POST {{api}}/api/ia/h5/asistente
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pregunta": "Quiero devolver los audífonos del pedido 1001, no me gustó el sonido" }
+
+### H5 · Autorización: Ana intenta consultar un pedido de Bruno (la puerta lo rechaza)
+POST {{api}}/api/ia/h5/asistente
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "pregunta": "Dime qué compró el pedido 1004" }
+
+### H5 · Regla de negocio: fuera de plazo (Bruno, pedido 1003 entregado hace 45 días)
+POST {{api}}/api/ia/h5/asistente
+Content-Type: application/json
+X-Cliente-Id: 2
+
+{ "pregunta": "Quiero devolver las zapatillas del pedido 1003" }
+
+### H5 · Auditoría
+GET {{api}}/api/ia/h5/auditoria

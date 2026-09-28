@@ -8,6 +8,7 @@ using UESAN.SHOPPING.AI.H1_Chat;
 using UESAN.SHOPPING.AI.H2_DatosTransaccionales;
 using UESAN.SHOPPING.AI.H3_Embeddings;
 using UESAN.SHOPPING.AI.H4_Rag;
+using UESAN.SHOPPING.AI.H5_Herramientas;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -41,6 +42,13 @@ public static class DependencyInjection
 
         // H4 · RAG
         services.AddScoped<RagService>();
+
+        // H5 · herramientas con puerta de validación y auditoría
+        services.AddScoped<RepositorioAuditoria>();
+        services.AddScoped<RepositorioDevoluciones>();
+        services.AddScoped<PuertaHerramientas>();
+        services.AddScoped<HerramientasFactory>();
+        services.AddScoped<AsistenteHerramientasService>();
 
         return services;
     }

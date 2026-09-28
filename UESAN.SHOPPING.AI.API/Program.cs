@@ -26,5 +26,6 @@ ia.MapH1Endpoints();   // H1 · pregunta y respuesta
 ia.MapH2Endpoints();   // H2 · datos transaccionales como contexto
 ia.MapH3Endpoints();   // H3 · embeddings y búsqueda vectorial
 ia.MapH4Endpoints();   // H4 · RAG
+ia.MapH5Endpoints();   // H5 · herramientas (tool calling)
 
 app.Run();
