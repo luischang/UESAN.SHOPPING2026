@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using UESAN.SHOPPING.AI.Configuracion;
 using UESAN.SHOPPING.AI.Datos;
 using UESAN.SHOPPING.AI.H1_Chat;
+using UESAN.SHOPPING.AI.H2_DatosTransaccionales;
 
 namespace UESAN.SHOPPING.AI;
 
@@ -25,6 +26,9 @@ public static class DependencyInjection
         services.AddChatClient(sp => ProveedoresIa.CrearChat(sp.GetRequiredService<IOptions<AiOptions>>().Value))
                 .UseLogging();
         services.AddScoped<ChatBasicoService>();
+
+        // H2 · datos transaccionales como contexto
+        services.AddScoped<AsistentePedidosService>();
 
         return services;
     }
