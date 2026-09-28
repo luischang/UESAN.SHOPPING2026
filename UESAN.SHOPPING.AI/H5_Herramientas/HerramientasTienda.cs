@@ -84,6 +84,65 @@ public sealed class HerramientasTienda(
             };
         });
 
+    // ───────────── H7 · herramientas adicionales del agente ─────────────
+
+    [Description("ACCIÓN: emite el reembolso de una solicitud de devolución REGISTRADA. El monto no puede superar lo pagado por el producto. Montos mayores a S/ 500 requieren aprobación de un supervisor.")]
+    public Task<string> EmitirReembolso(
+        [Description("Id de la solicitud de devolución (solicitudId que devuelve RegistrarDevolucion)")] int solicitudId,
+        [Description("Monto a reembolsar en soles")] decimal monto) =>
+        puerta.EjecutarAsync(ctx, nameof(EmitirReembolso), new { solicitudId, monto }, async () =>
+        {
+            var solicitud = await devoluciones.ObtenerAsync(solicitudId)
+                ?? throw new ReglaNegocioException($"No existe la solicitud {solicitudId}.");
+            if (solicitud.ClienteId != ctx.ClienteId)
+                throw new ReglaNegocioException("La solicitud no pertenece al cliente autenticado.");
+            if (solicitud.Estado == "REEMBOLSO_EMITIDO")
+                return new { solicitudId, solicitud.Estado, solicitud.MontoReembolso, mensaje = "El reembolso ya había sido emitido (idempotente)." };
+            if (solicitud.Estado != "REGISTRADA")
+                throw new ReglaNegocioException($"La solicitud está en estado {solicitud.Estado}.");
+
+            var pedido = await tienda.ObtenerPedidoAsync(solicitud.PedidoId);
+            var pagado = pedido?.Detalle.Where(d => d.ProductoId == solicitud.ProductoId)
+                .Sum(d => d.PrecioUnitario * d.Cantidad) ?? 0m;
+            if (monto <= 0 || monto > pagado)
+                throw new ReglaNegocioException($"El monto debe ser mayor que 0 y no superar lo pagado (S/ {pagado:0.00}).");
+
+            // Control en CÓDIGO (no en el prompt): acción sensible sin aprobación → no se ejecuta
+            if (monto > ctx.UmbralAprobacion && !ctx.Aprobaciones.Contains(ClaveAprobacion(solicitudId)))
+                throw new ReglaNegocioException("Este reembolso requiere aprobación de un supervisor.");
+
+            await devoluciones.EmitirReembolsoAsync(solicitudId, monto);
+            return new { solicitudId, estado = "REEMBOLSO_EMITIDO", monto };
+        });
+
+    [Description("Pide al cliente una foto o video del producto defectuoso. El agente queda EN ESPERA hasta que el cliente la envíe.")]
+    public string SolicitarEvidencia(
+        [Description("Qué evidencia necesitas y por qué")] string motivo) =>
+        "El agente queda en espera de la evidencia.";   // el ciclo del agente intercepta esta herramienta
+
+    [Description("Deriva el caso a una persona de postventa cuando es ambiguo, conflictivo o está fuera de la política.")]
+    public string EscalarAHumano(
+        [Description("Motivo del escalamiento")] string motivo) =>
+        "Caso escalado.";                               // el ciclo del agente intercepta esta herramienta
+
+    public static string ClaveAprobacion(int solicitudId) => $"EmitirReembolso:{solicitudId}";
+
+    /// <summary>Herramientas que se ofrecen al agente de H7 (por nombre, para ejecutarlas bajo control).</summary>
+    public IReadOnlyDictionary<string, AIFunction> ParaAgente()
+    {
+        AIFunction[] funciones =
+        [
+            AIFunctionFactory.Create(ConsultarPedido),
+            AIFunctionFactory.Create(ConsultarProducto),
+            AIFunctionFactory.Create(BuscarPolitica),
+            AIFunctionFactory.Create(RegistrarDevolucion),
+            AIFunctionFactory.Create(EmitirReembolso),
+            AIFunctionFactory.Create(SolicitarEvidencia),
+            AIFunctionFactory.Create(EscalarAHumano)
+        ];
+        return funciones.ToDictionary(f => f.Name);
+    }
+
     /// <summary>Herramientas que se ofrecen al asistente de H5.</summary>
     public IList<AITool> ParaAsistente() =>
     [

@@ -51,6 +51,17 @@ public sealed class RepositorioDevoluciones(ConexionSql conexion)
             "SELECT * FROM ai.SolicitudDevolucion WHERE Id = @id", new { id });
     }
 
+    /// <summary>H7 · Emite el reembolso solo si la solicitud sigue REGISTRADA.</summary>
+    public async Task<bool> EmitirReembolsoAsync(int id, decimal monto)
+    {
+        await using var cn = conexion.Crear();
+        return await cn.ExecuteAsync("""
+            UPDATE ai.SolicitudDevolucion
+            SET Estado = 'REEMBOLSO_EMITIDO', MontoReembolso = @monto
+            WHERE Id = @id AND Estado = 'REGISTRADA'
+            """, new { id, monto }) == 1;
+    }
+
     public async Task<IReadOnlyList<SolicitudDevolucionDto>> ListarAsync(int? clienteId)
     {
         await using var cn = conexion.Crear();

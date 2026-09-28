@@ -133,3 +133,32 @@ Content-Type: application/json
 X-Cliente-Id: 1
 
 { "pedidoId": 1002, "mensaje": "Mi pedido no llega, ¿dónde está?" }
+
+### H7 · Iniciar agente: caso simple, resuelto solo (Ana, pedido 1001)
+POST {{api}}/api/ia/h7/agente
+Content-Type: application/json
+X-Cliente-Id: 1
+
+{ "mensaje": "El mouse del pedido 1001 llegó incómodo, quiero devolverlo y que me reembolsen" }
+
+### H7 · Ver estado de una ejecución (reemplaza {id} por el que devolvió el paso anterior)
+GET {{api}}/api/ia/h7/agente/00000000-0000-0000-0000-000000000000
+
+### H7 · Ver la traza paso a paso (LLM vs herramienta, en qué se detuvo)
+GET {{api}}/api/ia/h7/agente/00000000-0000-0000-0000-000000000000/pasos
+
+### H7 · Caso con reembolso alto: el agente pide aprobación (Bruno, monitor S/1299, pedido 1004)
+POST {{api}}/api/ia/h7/agente
+Content-Type: application/json
+X-Cliente-Id: 2
+
+{ "mensaje": "Quiero devolver el monitor del pedido 1004, no era lo que esperaba, y que me devuelvan el dinero" }
+
+### H7 · Bandeja de aprobaciones pendientes
+GET {{api}}/api/ia/h7/aprobaciones
+
+### H7 · Supervisor aprueba (reemplaza {id})
+POST {{api}}/api/ia/h7/aprobaciones/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{ "aprobador": "supervisor.postventa@esan.edu.pe" }

@@ -17,6 +17,19 @@ public sealed class AiOptions
     public OpenAIOptions OpenAI { get; set; } = new();
 
     public ConocimientoOptions Conocimiento { get; set; } = new();
+
+    public AgenteOptions Agente { get; set; } = new();
+}
+
+/// <summary>H7 · Límites explícitos del agente: autonomía no es carta blanca.</summary>
+public sealed class AgenteOptions
+{
+    public int MaxPasos { get; set; } = 8;
+    public long PresupuestoTokens { get; set; } = 30000;
+    public int TiempoMaximoSegundos { get; set; } = 180;
+
+    /// <summary>Reembolsos mayores a este monto requieren aprobación humana (política de devoluciones).</summary>
+    public decimal UmbralAprobacionReembolso { get; set; } = 500m;
 }
 
 public sealed class ConocimientoOptions

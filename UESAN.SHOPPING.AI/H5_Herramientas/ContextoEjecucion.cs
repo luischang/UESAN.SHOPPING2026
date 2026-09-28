@@ -13,6 +13,10 @@ public sealed class ContextoEjecucion
     public required string Origen { get; init; }
     public required IReadOnlySet<string> HerramientasPermitidas { get; init; }
     public List<InvocacionHerramienta> Invocaciones { get; } = [];
+
+    // H7 · acciones sensibles: por encima del umbral se exige una aprobación humana concedida
+    public decimal UmbralAprobacion { get; init; } = decimal.MaxValue;
+    public IReadOnlySet<string> Aprobaciones { get; init; } = new HashSet<string>();
 }
 
 /// <summary>Error de negocio que se devuelve al modelo como resultado (no como excepción del sistema).</summary>
@@ -24,5 +28,12 @@ public static class CatalogoHerramientas
     public static readonly IReadOnlySet<string> Asistente = new HashSet<string>
     {
         "ConsultarProducto", "ConsultarPedido", "BuscarPolitica", "RegistrarDevolucion"
+    };
+
+    // H7 · el agente tiene más herramientas, incluidas las de control (espera y escalamiento)
+    public static readonly IReadOnlySet<string> Agente = new HashSet<string>
+    {
+        "ConsultarProducto", "ConsultarPedido", "BuscarPolitica", "RegistrarDevolucion",
+        "EmitirReembolso", "SolicitarEvidencia", "EscalarAHumano"
     };
 }
